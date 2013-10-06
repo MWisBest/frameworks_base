@@ -1906,6 +1906,13 @@ public final class Settings {
          */
         public static final String AUTO_BRIGHTNESS_RESPONSIVENESS = "auto_brightness_responsiveness";
 
+        /**
+         * Whether to enable adjustment of automatic brightness adjustment
+         * to sunrise and sunset.
+         * @hide
+         */
+        public static final String AUTO_BRIGHTNESS_TWILIGHT_ADJUSTMENT = "auto_brightness_twilight_adjustment";
+
          /**
           * Determines which streams are affected by mute. The
           * stream type's bit should be set to 1 if it should be muted when a mute request
@@ -1974,6 +1981,24 @@ public final class Settings {
          * not change the volume. See AudioManager.
          */
         public static final String VOLUME_BLUETOOTH_SCO = "volume_bluetooth_sco";
+
+        /**
+         * Whether the phone ringtone should be played in an increasing manner
+         * @hide
+         */
+        public static final String INCREASING_RING = "increasing_ring";
+
+        /**
+         * Minimum volume index for increasing ring volume
+         * @hide
+         */
+        public static final String INCREASING_RING_MIN_VOLUME = "increasing_ring_min_vol";
+
+        /**
+         * Time (in ms) between ringtone volume increases
+         * @hide
+         */
+        public static final String INCREASING_RING_INTERVAL = "increasing_ring_interval";
 
         /**
          * Master volume (float in the range 0.0f to 1.0f).
@@ -2681,6 +2706,13 @@ public final class Settings {
         public static final String RECENT_KILL_ALL_BUTTON = "recent_kill_all_button";
 
         /**
+         * whether to show GoogleNow on recent switcher
+         *
+         * @hide
+         */
+        public static final String RECENT_GOOGLE_ASSIST = "recent_google_assist";
+
+        /**
          * whether to enable end app on back longpress functionality
          *
          * @hide
@@ -2764,6 +2796,28 @@ public final class Settings {
                 "navring_icon_3",
                 "navring_icon_4",
         };
+
+        /**
+         * Setting for animation controls
+         *
+         * @hide
+         */
+        public static final String[] ACTIVITY_ANIMATION_CONTROLS = new String[] {
+                "activity_open",
+                "activity_close",
+                "task_open",
+                "task_close",
+                "task_to_front",
+                "task_to_back",
+                "wallpaper_open",
+                "wallpaper_close",
+                "wallpaper_intra_open",
+                "wallpaper_intra_close",
+        };
+
+        public static final String ANIMATION_CONTROLS_DURATION = "animation_controls_duration";
+
+        public static final String ANIMATION_CONTROLS_NO_OVERRIDE = "animation_controls_no_override";
 
         /**
          * Setting to enable volume options.
@@ -3649,6 +3703,13 @@ public final class Settings {
         public static final String SHADE_COLLAPSE_ALL = "shade_collapse_all";
 
         /**
+         * enable vibrate on toggle click
+         *
+         * @hid
+         */
+        public static final String QUICK_TOGGLE_VIBRATE = "quick_toggle_vibrate";
+
+        /**
          * enable and disable fast toggle in settings
          *
          * @hide
@@ -3750,6 +3811,14 @@ public final class Settings {
         public static final String MVNO_ROAMING = "mvno_roaming";
 
         public static final String THEME_WALLPAPER = "theme_wallpaper";
+
+        /**
+         * Allows to disable Camera widget in locskcreen
+         * 0 = hide camera
+         * 1 = show camera - default
+         * @hide
+         */
+        public static final String LOCKSCREEN_CAMERA_WIDGET_SHOW = "lockscreen_camera_widget_show";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -4130,6 +4199,14 @@ public final class Settings {
          * @hide
          */
         public static final String TOGGLES_STYLE = "toggls_style";
+
+        /**
+         * Boolean value. Whether to show the 4G icon when on LTE.
+         * True = show 4G
+         * False = show LTE
+         * @hide
+         */
+        public static final String STATUSBAR_SIGNAL_SHOW_4G_FOR_LTE = "statusbar_signal_show_4g_for_lte";
     }
 
     /**

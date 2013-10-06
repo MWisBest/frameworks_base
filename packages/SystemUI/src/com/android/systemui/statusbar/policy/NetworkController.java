@@ -141,6 +141,7 @@ public class NetworkController extends BroadcastReceiver {
 
     private boolean mHideSignal;
     private boolean mUseAltSignal;
+    private boolean mShow4gForLte;
 
     // our ui
     Context mContext;
@@ -743,8 +744,7 @@ public class NetworkController extends BroadcastReceiver {
                             R.string.accessibility_data_connection_3g);
                     break;
                 case TelephonyManager.NETWORK_TYPE_LTE:
-                    boolean show4GforLTE = mContext.getResources().getBoolean(R.bool.config_show4GForLTE);
-                    if (show4GforLTE) {
+                    if (mShow4gForLte) {
                         mDataIconList = mUseAltSignal ? TelephonyIcons.DATA_4G_ALT[mInetCondition] :
                             TelephonyIcons.DATA_4G[mInetCondition];
                         mDataTypeIconId = mDataIconList[0];
@@ -754,8 +754,9 @@ public class NetworkController extends BroadcastReceiver {
                                 R.string.accessibility_data_connection_4g);
                     } else {
                         mDataIconList = TelephonyIcons.DATA_LTE[mInetCondition];
-                        mDataTypeIconId = R.drawable.stat_sys_data_connected_lte;
-                        mQSDataTypeIconId = R.drawable.ic_qs_signal_lte;
+                        mDataTypeIconId = mDataIconList[0];
+                        mQSDataTypeIconId = (isConnected ? R.drawable.ic_qs_signal_full_lte
+                                : R.drawable.ic_qs_signal_lte);
                         mContentDescriptionDataType = mContext.getString(
                                 R.string.accessibility_data_connection_lte);
                     }
@@ -1623,6 +1624,10 @@ public class NetworkController extends BroadcastReceiver {
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.STATUSBAR_SIGNAL_CLUSTER_ALT), false,
                     this);
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.STATUSBAR_SIGNAL_SHOW_4G_FOR_LTE),
+                    mContext.getResources().getBoolean(R.bool.config_show4GForLTE),
+                    this);
             updateSettings();
         }
 
@@ -1638,6 +1643,9 @@ public class NetworkController extends BroadcastReceiver {
                 Settings.System.STATUSBAR_HIDE_SIGNAL_BARS,false));
         mUseAltSignal = (Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.STATUSBAR_SIGNAL_CLUSTER_ALT, clustdefault));
+        mShow4gForLte = (Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.STATUSBAR_SIGNAL_SHOW_4G_FOR_LTE,
+                mContext.getResources().getBoolean(R.bool.config_show4GForLTE)));
         updateTelephonySignalStrength();
         updateDataNetType();
         updateDataIcon();
